@@ -5,6 +5,11 @@ const TMDB_API_KEY = "fbf2082d1c9aa53112719c7123bfd06d";
 export const TMDB_POSTER_API = "//image.tmdb.org/t/p";
 const moviedb = new MovieDb(TMDB_API_KEY);
 
+export interface ExtMovieResult extends MovieResult {
+  posterUrl?: string
+  images?: MovieImagesResponse
+}
+
 export const getAssetUrl = (file_path: string, size = "original") =>
   `${TMDB_POSTER_API}/${size}${file_path}`;
 
@@ -15,28 +20,28 @@ export const orderBestPosters = (images: MovieImagesResponse) =>
     ["desc", "desc"]
   );
 
-const getPaginatedResult = async (
-  method: string,
-  params: any,
-  limit: number
-) => {
-  const getPage = async (results = [], page: number = 1): Promise<any> => {
-    const newParams = { ...params, page };
-    const resp = await moviedb[method](newParams);
-    console.log({ resp });
-    const nextResults = [...results, ...resp.results];
+// const getPaginatedResult = async (
+//   method: string,
+//   params: any,
+//   limit: number
+// ) => {
+//   const getPage = async (results = [], page: number = 1): Promise<any> => {
+//     const newParams = { ...params, page };
+//     const resp:any = await moviedb[method](newParams);
+//     console.log({ resp });
+//     const nextResults = [...results, ...resp.results];
 
-    if (nextResults.length < limit && resp.total_pages >= ++page) {
-      return getPage(nextResults, page);
-    } else {
-      return nextResults;
-    }
-  };
+//     if (nextResults.length < limit && resp.total_pages >= ++page) {
+//       return getPage(nextResults, page);
+//     } else {
+//       return nextResults;
+//     }
+//   };
 
-  return getPage();
-};
+//   return getPage();
+// };
 
-export const addData = async (movie: MovieResult, index: number) => {
+export const addData = async (movie: MovieResult, index: number): Promise<ExtMovieResult> => {
   if (!movie?.id) return movie;
 
   const images = await moviedb.movieImages(movie.id);
@@ -58,14 +63,14 @@ export const getList = async (id: string) => {
   return moviesWImages;
 };
 
-export const getTMDB = async (
-  method: string,
-  params: any,
-  limit = 100
-): Promise<MovieResult[]> => {
-  const movies = await getPaginatedResult(method, params, limit);
-  if (!movies) return [];
+// export const getTMDB = async (
+//   method: string,
+//   params: any,
+//   limit = 100
+// ): Promise<MovieResult[]> => {
+//   const movies = await getPaginatedResult(method, params, limit);
+//   if (!movies) return [];
 
-  const moviesWImages = await Promise.all(movies.map(addData));
-  return moviesWImages;
-};
+//   const moviesWImages = await Promise.all(movies.map(addData));
+//   return moviesWImages;
+// };

@@ -14,6 +14,7 @@ function PosterSlideshow() {
 
   const slides =
     posters &&
+
     posters.map(({ id, original_title, posterUrl, images }, index) => (
       <SwiperSlide key={id}>
         <div className="flex flex-col w-screen h-screen">

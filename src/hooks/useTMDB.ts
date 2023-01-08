@@ -1,7 +1,6 @@
 import React from "react";
-import { MovieResult } from "moviedb-promise";
 import { useSearchParams } from "react-router-dom";
-import { getList } from "./tmdb.utils";
+import { getList, ExtMovieResult } from "./tmdb.utils";
 
 function getEveryNth(arr: any[], nth: number, index: number) {
   const result = [];
@@ -18,7 +17,7 @@ export default function useTMDB() {
   const screenIndex = Number(searchParams.get("screenIndex")) || 1;
   const screenCount = Number(searchParams.get("screenCount")) || 5;
   const postersPerScreen = Number(searchParams.get("postersPerScreen")) || 20;
-  const [posters, setPosters] = React.useState<MovieResult[]>([]);
+  const [posters, setPosters] = React.useState<ExtMovieResult[]>([]);
 
   React.useEffect(() => {
     const limit = postersPerScreen * screenCount;
