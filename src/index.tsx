@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import "modern-normalize/modern-normalize.css";
 
 // eslint-disable-next-line
-// import "swiper/css/bundle";
+import "swiper/css/bundle";
 
 import App from "./App";
 
@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/MoviePosters">
       <App />
     </BrowserRouter>
   </React.StrictMode>
