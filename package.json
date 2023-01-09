@@ -2,6 +2,7 @@
   "name": "movieposters-2",
   "version": "1.0.0",
   "private": true,
+  "homepage": "/MoviePosters",
   "dependencies": {
     "lodash-es": "4.17.21",
     "modern-normalize": "1.1.0",
