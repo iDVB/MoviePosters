@@ -22,7 +22,7 @@ function PosterSlideshow() {
             <img src={posterUrl} alt="" className="object-cover" />
           </div>
           <div className="flex flex-col grow justify-center bg-gradient-to-r from-slate-900 to-slate-800">
-            <p className="text-9xl text-white font-['Anton'] text-[7em]">
+            <p className="text-9xl text-white font-['Anton'] text-[5em]">
               NOW PLAYING
             </p>
           </div>
