@@ -7,6 +7,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+import SwiperGL from '../../_vendor/Swiper/swiper-gl.esm';
+import '../../_vendor/Swiper/swiper-gl.scss';
+import '../../_vendor/Swiper/main.scss';
+
 import { Pagination, Autoplay } from "swiper";
 
 function PosterSlideshow() {
@@ -17,25 +21,17 @@ function PosterSlideshow() {
 
     posters.map(({ id, original_title, posterUrl, images }, index) => (
       <SwiperSlide key={id}>
-        <div className="flex flex-col w-full h-full">
-          <div className="">
-            <img src={posterUrl} alt="" className="object-cover" />
-          </div>
-          <div className="flex flex-col grow justify-center bg-gradient-to-r from-slate-900 to-slate-800">
-            <p className="text-9xl text-white font-['Anton'] text-[5em]">
-              NOW PLAYING
-            </p>
-          </div>
-        </div>
+        <img src={posterUrl} alt="" className="swiper-gl-image object-cover" />
       </SwiperSlide>
     ));
   return (
     <>
       <Swiper
         // direction={"vertical"}
+        className="mySwiper"
         speed={1000}
         slidesPerView={1}
-        spaceBetween={30}
+        // spaceBetween={30}
         loop={true}
         autoplay={{
           delay: 15000,
@@ -44,8 +40,13 @@ function PosterSlideshow() {
         pagination={{
           clickable: false
         }}
-        modules={[Autoplay, Pagination]}
-        className="mySwiper"
+        modules={[Autoplay, Pagination, SwiperGL]}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        effect="gl"
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        onBeforeInit={(swiper) => (swiper.params.gl.shader = 'morph-x')}
       >
         {slides}
       </Swiper>
