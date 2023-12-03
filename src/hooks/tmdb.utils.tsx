@@ -1,7 +1,7 @@
 import { orderBy as _orderBy, filter as _filter } from "lodash-es";
 import { MovieDb, MovieResult, MovieImagesResponse } from "moviedb-promise";
 
-const TMDB_API_KEY = "fbf2082d1c9aa53112719c7123bfd06d";
+const TMDB_API_KEY = "dd0f0162286daafc7138cd1b6d6a3f07";
 export const TMDB_POSTER_API = "//image.tmdb.org/t/p";
 const moviedb = new MovieDb(TMDB_API_KEY);
 
